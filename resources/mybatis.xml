@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <mappers>
+        <!--mapper 是文件路径引入映射器  用/具体到了文件名  package是包名引入映射器 可以具体到包  class是类注册引入映射器 具体到了某个类 url是使用绝对路径 写死了，不好-->
+        <!--<mapper resource="com/itheima/dao/IUserDao.xml"></mapper>-->
+        <!-- package标签是用于指定dao接口所在的包,当指定了之后就不需要在写mapper以及resource或者class了 -->
+        <package name="aynu.dao"></package>
+    </mappers>
+
+</configuration>

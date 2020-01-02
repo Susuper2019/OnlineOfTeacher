@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+  http://www.springframework.org/schema/context 
+  http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 指定需要扫描的包 -->
+	<context:component-scan base-package="aynu.controller" />
+	<!-- 配置注解驱动 -->
+	<mvc:annotation-driven />
+
+	<!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截 -->
+
+	<mvc:resources mapping="/img/**" location="/img/"/>
+	<mvc:resources mapping="/plugins/**" location="/plugins/"/>
+	<mvc:resources mapping="/css/**" location="/css/"/>
+	<mvc:resources mapping="/page/**" location="/page/"/>
+
+
+	<bean id="viewResolver" class=
+			"org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 设置前缀 -->
+		<property name="prefix" value="/page/" />
+		<!-- 设置后缀 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 显示的装配自定义类型转换器 -->
+	<!--<mvc:annotation-driven conversion-service="conversionService" />-->
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="aynu.utils.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!--文件上传-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="2000000"/>
+	</bean>
+
+</beans>  
